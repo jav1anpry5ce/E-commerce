@@ -2,6 +2,17 @@
 
 session_start();
 
+$time = $_SERVER['REQUEST_TIME'];
+$timeout = 300;
+
+if (isset($_SESSION['LAST_ACTIVITY']) && 
+	($time - $_SESSION['LAST_ACTIVITY']) > $timeout) {
+	session_unset();
+	session_destroy();
+	session_start(); 
+}
+$_SESSION['LAST_ACTIVITY'] = $time;
+
 // Include config file
 require_once "conn.php";
 
@@ -17,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$username_err = "Please enter a username.";
 	} else{
         // Prepare a select statement
-		$sql = "SELECT id FROM users WHERE username = ?";
+		$sql = "SELECT id FROM admin WHERE username = ?";
 
 		if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -67,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$email_err = "Please enter an email.";
 	} else{
         // Prepare a select statement
-		$sql = "SELECT id FROM users WHERE email = ?";
+		$sql = "SELECT id FROM admin WHERE email = ?";
 
 		if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -122,7 +133,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	if(empty($username_err) && empty($firstname_err) && empty($lastname_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
 
         // Prepare an insert statement
-		$sql = "INSERT INTO users (username, firstname, lastname, email, password, created_at) VALUES (?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO admin (username, firstname, lastname, email, password, created_at) VALUES (?, ?, ?, ?, ?, ?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -213,7 +224,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <span class="danger"><?php echo $confirm_password_err; ?></span>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-outline-dark btn-lg" value="Sign Up" /><br>
+                <input type="submit" class="button" value="Sign Up" /><br>
                 <div class="card-footer">
                     <a href='login.php'>Already have an account? Login here</a>
                 </div>

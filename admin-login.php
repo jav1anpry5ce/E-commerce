@@ -2,12 +2,6 @@
 // Initialize the session
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_COOKIE["loggedin"])){
-    header("location: home.php");
-    exit;
-}
-
 // Include config file
 require_once "conn.php";
 
@@ -35,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, firstname, password FROM users WHERE username = ? OR email = ?";
+        $sql = "SELECT id, username, firstname, password FROM admin WHERE username = ? OR email = ?";
 
 
         if($stmt = mysqli_prepare($link, $sql)){
@@ -56,21 +50,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_bind_result($stmt, $id, $username, $firstname, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
 
-                            // Store data in cookie variables
-                            setcookie("loggedin", true, time() + (10 * 365 * 24 * 60 * 60));
-                            setcookie("id", $id, time() + (10 * 365 * 24 * 60 * 60));
-                            setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
-                            setcookie("firstname", $firstname, time() + (10 * 365 * 24 * 60 * 60));
-                            // $_SESSION["loggedin"] = true;
-                            // $_SESSION["id"] = $id;
-                            // $_SESSION["username"] = $username;
-                            // $_SESSION["firstname"] = $firstname;
+                            // Store data in session variables
+                            $_SESSION["admin"] = true;
+                            $_SESSION['admin-time'] = time();
+                            $_SESSION["admin-id"] = $id;
+                            $_SESSION["admin-username"] = $username;
+                            $_SESSION["admin-firstname"] = $firstname;
 
-                            // Redirect user to welcome page
-                            header("location: home.php");
+                            // Redirect user to admin page
+                            header("location: admin.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
@@ -101,13 +90,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
-    <title>Login</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<!-- Display Html -->
 
 <body>
     <div class="container">
@@ -115,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <form class="card w-50" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <h1>Login</h1>
+                        <h1>Admin Login</h1>
                         <input class="form-control" type="text" name="username" id="inputEmail" class="form-control"
                             placeholder="Username/Email" required autofocus value="<?php echo $username; ?>">
                         <span class="help-block" style="color: red;"><?php echo $username_err; ?></span>
@@ -125,12 +113,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <span class="help-block" style="color: red;"><?php echo $password_err; ?></span>
                 </div>
                 <input class="btn btn-outline-dark btn-lg" type="submit" value="Sign In"></input><br>
-                <div class="card-footer">
-                    <a href="register.php">Not a member? Sign up here</a><br>
-                    <a href="forgot-password.php" class="forgot-password">
-                        Forgot your password?
-                    </a>
-                </div>
         </div>
         </form>
     </div>
