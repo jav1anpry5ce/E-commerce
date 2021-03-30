@@ -209,8 +209,8 @@ html {
 }
 .cartt-image {
   align-items: left;
-  height: 165px;
-  width: 150px;
+  height: 200px;
+  width: 220px;
 }
 .cartt-body {
   margin-left: 3%;
@@ -231,5 +231,5 @@ html {
 footer {
   position: absolute;
   width: 100%;
-  margin-top: 90px;
+  margin-top: 120px;
 }

@@ -17,12 +17,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body>
+    <script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 2000);
+    </script>
     <?php
-    require_once 'navbar.php'
+    require_once 'navbar.php';
+    if(isset($_GET['cart'])){
+        if($_GET['cart'] === 'updated'){
+            ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+        <strong>Sucess!</strong> Item added to cart.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+    }
+    }
     ?>
+
     <div class="container">
         <h1>Top pick of the day</h1>
         <div class="flex d-flex flex-row">
@@ -63,7 +84,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="cart.php?action=add&id=<?php $id?>">
+                            <form method="POST" action="cart.php?action=add&id=<?php echo $id?>">
                                 <div class="modal-view">
                                     <img class="modal-view-image" src=<?php echo $image ?>>
                                     <div class="modal-view-body">
