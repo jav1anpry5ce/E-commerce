@@ -47,7 +47,7 @@ if (isset($_POST["reset-request-submit"])) {
 	$message .= '<p>Here is your password reset link: </br>';
 	$message .= '<a href="' .$url . '">' . $url . '</a></p>';
 
-	$headers = "From: E-Commerce <Admin@localhost>\r\n";
+	$headers = "From: E-Commerce <donotreply@localhost>\r\n";
 	$headers .= "Content-type: text/html\r\n";
 
 	mail($to, $subject, $message, $headers);

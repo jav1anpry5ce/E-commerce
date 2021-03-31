@@ -123,18 +123,23 @@ html {
 }
 .list-image {
   text-align: center;
-  height: 250px;
-  width: 250px;
+  height: 130px;
+  width: 130px;
 }
 .list-body {
-  margin-top: 2%;
-  margin-left: 8%;
+  margin-left: 3%;
   align-items: center;
   text-align: left;
 }
+.list-body a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.781);
+}
+.list-body a:hover {
+  color: rgb(216, 141, 1);
+}
 .list-title {
-  font-weight: bold;
-  font-size: 45px;
+  font-size: 30px;
 }
 .modal-view {
   display: flex;
@@ -210,7 +215,7 @@ html {
 .cartt-image {
   align-items: left;
   height: 200px;
-  width: 220px;
+  width: 200px;
 }
 .cartt-body {
   margin-left: 3%;

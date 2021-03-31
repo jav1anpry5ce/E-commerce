@@ -43,10 +43,12 @@ if(isset($_COOKIE['loggedin'])){
     }
     if(isset($_POST['url'])){
         $url = $_POST['url'];
+        $url = str_replace("&cart=updated", "", $url);
+
         if(strpos($url, '?') !== false){
-            $added = str_replace('?', "", '?&cart=updated');
+            $added = "&cart=updated";
         }else{
-            $added = '?&cart=updated';
+            $added = "?&cart=updated";
         }
     // redirect to current page
         header('Location: '. $url. $added);

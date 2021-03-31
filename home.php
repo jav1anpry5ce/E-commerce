@@ -64,7 +64,8 @@
                         ?>
             <!-- display items in html. -->
             <div class="card">
-                <img class="card-img-top image" src=<?php echo $image ?>>
+                <a href="" data-toggle="modal" data-target="#<?php echo $id ?>"><img class="card-img-top image"
+                        src=<?php echo $image ?>></a>
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $name ?></h5>
                     <p><b>$<?php echo $price ?></b></p>
