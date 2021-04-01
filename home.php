@@ -18,6 +18,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="images/e-commerce.png" />
 </head>
 
 <body>
@@ -46,7 +47,7 @@
 
     <div class="container">
         <h1>Top pick of the day</h1>
-        <div class="flex d-flex flex-row">
+        <div class="flex d-flex flex-row justify-content-center">
             <?php
                 include 'conn.php';
                 // Get the first four items in the database.
@@ -63,7 +64,7 @@
                         $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                         ?>
             <!-- display items in html. -->
-            <div class="card">
+            <div class="card" style="height:360px">
                 <a href="" data-toggle="modal" data-target="#<?php echo $id ?>"><img class="card-img-top image"
                         src=<?php echo $image ?>></a>
                 <div class="card-body">
@@ -95,6 +96,8 @@
                                         <input type="hidden" name="hidden-name" value="<?php echo $name ?>" />
                                         <input type="hidden" name="hidden-price" value="<?php echo $price ?>" />
                                         <input type="hidden" name="hidden-image" value="<?php echo $image ?>" />
+                                        <input type="hidden" name="hidden-description"
+                                            value="<?php echo $description?>" />
                                         <input type="hidden" name="url" value="<?php echo $url ?>" />
                                         <input type="submit" name="add-to-cart" class="btn btn-outline-secondary btn-sm"
                                             value="Add to Cart" title="Add to Cart">

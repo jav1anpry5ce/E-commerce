@@ -20,7 +20,7 @@ session_start();
     <nav class="nav-bar">
         <ul>
             <form method="GET" action="product.php">
-                <a class="logo" title="Home" href="home.php"><img class="logo-img" src="images/logo.png" /></a>
+                <a class="logo" title="Home" href="home.php"><img class="logo-img" src="images/e-commerce.png" /></a>
                 <input name="search" class="search" type="text" placeholder="search..." />
                 <button type="submit" class="btn btn-search" title="Search"><i class="fa fa-search fa-lg"
                         aria-hidden="true"></i></button>

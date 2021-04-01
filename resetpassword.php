@@ -41,7 +41,7 @@ if (isset($_POST["reset-password-submit"])) {
 
 				if ($tokenCheck === false) {
 					//echo "you need to re-submit your reset request";
-					header("Location: forgot-password.php?reset=fail");
+					header("Location: forgot-password.html?reset=fail");
 					exit();
 				} elseif ($tokenCheck === true) {
 
@@ -80,7 +80,7 @@ if (isset($_POST["reset-password-submit"])) {
 								$stmt = mysqli_stmt_init($link);
 								if (!mysqli_stmt_prepare($stmt, $sql)) {
 									//echo "There was an error!";
-									header("Location: forgot-password.php?reset=fail");
+									header("Location: forgot-password.html?reset=fail");
 									exit();
 								} else {
 									mysqli_stmt_bind_param($stmt, "s", $tokenEmail);

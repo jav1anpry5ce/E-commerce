@@ -13,7 +13,8 @@ if(isset($_COOKIE['loggedin'])){
                     'item-name' => $_POST['hidden-name'],
                     'item-price' => $_POST['hidden-price'],
                     'item-quantity' => $_POST['hidden-quantity'],
-                    'item-image' => $_POST['hidden-image']
+                    'item-image' => $_POST['hidden-image'],
+                    'item-description' => $_POST['hidden-description']
                 );
                 $_SESSION['shopping-cart'][$count] = $item_array;
             }
@@ -25,7 +26,8 @@ if(isset($_COOKIE['loggedin'])){
                 'item-name' => $_POST['hidden-name'],
                 'item-price' => $_POST['hidden-price'],
                 'item-quantity' => $_POST['hidden-quantity'],
-                'item-image' => $_POST['hidden-image']
+                'item-image' => $_POST['hidden-image'],
+                'item-description' => $_POST['hidden-description']
             );
             $_SESSION['shopping-cart'][0] = $item_array;
         }
@@ -48,7 +50,7 @@ if(isset($_COOKIE['loggedin'])){
         if(strpos($url, '?') !== false){
             $added = "&cart=updated";
         }else{
-            $added = "?&cart=updated";
+            $added = "?cart=updated";
         }
     // redirect to current page
         header('Location: '. $url. $added);

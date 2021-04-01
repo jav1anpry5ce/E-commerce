@@ -142,7 +142,7 @@
                 }
                 ?>
             <!-- Create a paginiation to navigate through the pages -->
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" href="product.php?search=<?php

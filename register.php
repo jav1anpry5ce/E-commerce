@@ -126,7 +126,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-			mysqli_stmt_bind_param($stmt, "sssssd", $param_username, $param_firstname, $param_lastname, $param_email, $param_password, $created_at);
+			mysqli_stmt_bind_param($stmt, "ssssss", $param_username, $param_firstname, $param_lastname, $param_email, $param_password, $created_at);
 
             // Set parameters
 			$param_username = $username;
@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$param_lastname = $lastname;
 			$param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-			$created_at = new DateTime('NOW');
+			$created_at = date('Y-m-d H:i:s');
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -145,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$message .= "<p>We are delighted to have you join E-Commerce. You'll find great deals here.</p>";
 				$message .= "<p>Regards, </p>";
 				$message .= "<p>E-Commerce</p>";
-				$headers = "From: E-Commerce <Admin@localhost>\r\n";
+				$headers = "From: E-Commerce <donotreply@localhost>\r\n";
 				$headers .= "Content-type: text/html\r\n";
 				mail($to, $subject, $message, $headers);
                 // Redirect to login page
@@ -164,6 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
+<!-- Display registration HTML -->
 <!DOCTYPE html>
 <html>
 
@@ -174,6 +175,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="images/e-commerce.png" />
 </head>
 
 <body>

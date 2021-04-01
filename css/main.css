@@ -21,13 +21,17 @@ html {
   margin-left: 15px;
 }
 .search {
-  width: 65%;
+  width: 75%;
   padding: 0.5%;
+  padding-right: 50px;
   border: none;
   margin-left: 1.5%;
   margin-top: 8px;
   font-size: 17px;
   border-radius: 5px;
+}
+.search:focus {
+  outline: none;
 }
 .cart {
   overflow: hidden;
@@ -67,18 +71,17 @@ html {
   font-size: 5px;
 }
 .btn-search {
-  margin: 0;
-  margin-left: -0.3%;
-  height: 43px;
-  width: 60px;
+  margin-left: -55px;
+  margin-top: -2.2px;
+  width: 50px;
   background-color: white;
   text-decoration: none;
-  border: 2px solid rgb(25, 37, 49);
+  /* border: 2px solid rgb(25, 37, 49); */
   transition-duration: 0.4s;
   border-radius: 5px;
 }
 .btn-search:hover {
-  background-color: rgba(107, 145, 184, 0.692);
+  background-color: rgb(219, 145, 25);
 }
 .container {
   text-align: center;
@@ -150,8 +153,8 @@ html {
   margin-top: 1%;
 }
 .modal-view-image {
-  height: 280px;
-  width: 280px;
+  height: 35%;
+  width: 35%;
 }
 .modal-view-body {
   margin-left: 3%;
@@ -197,9 +200,6 @@ html {
   width: 60px;
   border-radius: 5px;
   text-align: center;
-}
-.card {
-  height: 365px;
 }
 .cartt {
   display: flex;
