@@ -1,3 +1,11 @@
+<?php
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+        $url = "https://";
+    }else{
+        $url = "http://";
+    }
+    $url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +69,6 @@
                         $price = $row["product_price"];
                         $image = $row["product_image"];
                         $description = $row["product_description"];
-                        $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                         ?>
             <!-- display items in html. -->
             <div class="card" style="height:360px">
@@ -117,7 +124,7 @@
         </div>
     </div>
     <?php
-        require_once 'footer.html';
+        require_once 'footer.php';
     ?>
 </body>
 

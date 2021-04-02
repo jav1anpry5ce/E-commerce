@@ -1,3 +1,11 @@
+<?php
+  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+    $url = "https://";
+  }else{
+    $url = "http://";
+  }
+  $url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +27,8 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="images/e-commerce.png" />
     <title>Products</title>
 </head>
 
@@ -62,7 +72,6 @@
                         mysqli_stmt_bind_param($stmt, "ss", $search_value, $search_value);
                         // execute the search query and gets the number of pages.
                         if(mysqli_stmt_execute($stmt)){
-                            $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                             mysqli_stmt_store_result($stmt);
                             $num_of_results = mysqli_stmt_num_rows($stmt);
                             $number_of_pages = ceil($num_of_results/$results_per_page);
@@ -186,7 +195,7 @@
         </div>
     </div>
     <?php
-        require_once 'footer.html';
+        require_once 'footer.php';
     ?>
 </body>
 
