@@ -6,9 +6,9 @@ html {
 }
 .nav-bar ul {
   list-style-type: none;
+  overflow: hidden;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: rgb(25, 37, 49);
 }
 .logo {
@@ -29,6 +29,7 @@ html {
   margin-top: 8px;
   font-size: 17px;
   border-radius: 5px;
+  overflow: hidden;
 }
 .search:focus {
   outline: none;
@@ -131,6 +132,7 @@ html {
   width: 150px;
 }
 .list-body {
+  margin-top: 2%;
   margin-left: 3%;
   align-items: center;
   text-align: left;
@@ -237,5 +239,20 @@ html {
 footer {
   position: absolute;
   width: 100%;
-  margin-top: 120px;
+  margin-top: 60px;
+}
+.position {
+  position: relative;
+  width: 100%;
+}
+.contact-info {
+  position: absolute;
+  top: 25%;
+  right: 6%;
+}
+.text {
+  text-align: left;
+}
+.form-group {
+  text-align: left;
 }

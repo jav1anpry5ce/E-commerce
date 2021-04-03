@@ -98,10 +98,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Validate password
 	$input_password = trim($_POST['password']);
+
+	$uppercase = preg_match('@[A-Z]@', $input_password);
+	$lowercase = preg_match('@[a-z]@', $input_password);
+	$number = preg_match('@[0-9]@', $input_password);
+	$specialChars = preg_match('@[^\w]@', $input_password);
+
 	if(empty($input_password)){
 		$password_err = "Please enter a password.";     
-	} elseif(strlen(trim($_POST["password"])) < 8){
-		$password_err = "Password must have atleast 8 characters.";
+	} elseif(strlen(trim($_POST["password"])) < 8 || !$uppercase || !$lowercase || !$number || !$specialChars){
+		$password_err = "Password must have atleast 8 characters, a number, a lowercase letter, a uppercase letter and a special character.";
 	} else{
 		$password = $input_password;
 	}

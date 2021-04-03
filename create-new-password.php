@@ -1,3 +1,11 @@
+<?php
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+        $url = "https://";
+    }else{
+        $url = "http://";
+    }
+    $url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -11,20 +19,68 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="images/e-commerce.png" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body>
+    <script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 2000);
+    </script>
+    <!-- Show different errors that may occur -->
     <?php
-    // Get unique valdiator to ensure user is authenticate.
-	$selector = $_GET["selector"];
-	$validator = $_GET["validator"];
+    if(isset($_GET['password'])){
+        if($_GET['password'] === 'not-stronged'){
+            ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="danger-alert">
+        <strong>Error!</strong> Password wasn't strong try again.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+        } else if($_GET['password'] === 'empty'){
+            ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="danger-alert">
+        <strong>Error!</strong> Password was empty. Try again!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+    } else if($_GET['password'] === 'error'){
+        ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="danger-alert">
+        <strong>Error!</strong> Password did not match. Try again!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+        }
+    }
+    // Get unique valdiator to ensure user is authenticated.
+    $selector = $_GET["selector"];
+    $validator = $_GET["validator"];
 
-	if (empty($selector) || empty($validator)) {
-		header("Location: ../forgot-password.php?validate=couldnotvalidate");
+    if (empty($selector) || empty($validator)) {
+    header("Location: ../forgot-password.php?validate=couldnotvalidate");
 
-	} else {
-		if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
-			?>
+    } else {
+    if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
+    ?>
     <!-- Display form to reset password -->
     <div class="container">
         <div class="row justify-content-center centering">
@@ -40,6 +96,7 @@
                     <div class="form-group">
                         <label for="pwd2" class="text-primary">Confirm Password:</label><br>
                         <input class="form-control" type="password" id="pwd2" required name="pwd-repeat">
+                        <input type="hidden" name="url" value="<?php echo $url ?>" />
                     </div>
                     <button type="submit" name="reset-password-submit" class="btn btn-outline-secondary btn-md">Reset
                         password</button>

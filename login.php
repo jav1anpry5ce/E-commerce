@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input class="btn btn-outline-dark btn-lg" type="submit" value="Sign In"></input><br>
                 <div class="card-footer">
                     <a href="register.php">Not a member? Sign up here</a><br>
-                    <a href="forgot-password.html" class="forgot-password">
+                    <a href="forgot-password.php" class="forgot-password">
                         Forgot your password?
                     </a>
                 </div>

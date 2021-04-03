@@ -46,6 +46,7 @@ if(isset($_COOKIE['loggedin'])){
     if(isset($_POST['url'])){
         $url = $_POST['url'];
         $url = str_replace("&cart=updated", "", $url);
+        $url = str_replace('?cart=updated', "", $url);
 
         if(strpos($url, '?') !== false){
             $added = "&cart=updated";

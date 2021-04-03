@@ -1,5 +1,12 @@
 <?php
 
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+        $url = "https://";
+    }else{
+        $url = "http://";
+    }
+    $url .= $_SERVER['HTTP_HOST'];
+
 // Check if the user press the button to reset their password and execute the code below.
 if (isset($_POST["reset-request-submit"])) {
 
@@ -7,7 +14,7 @@ if (isset($_POST["reset-request-submit"])) {
 	$selector = bin2hex(random_bytes(8));
 	$token = random_bytes(32);
 
-	$url = "http://localhost/e-commerce/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+	$url .= "/e-commerce/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 	$expires = date("U") + 1800;
 
@@ -52,9 +59,9 @@ if (isset($_POST["reset-request-submit"])) {
 
 	mail($to, $subject, $message, $headers);
 
-	header("Location: forgot-password.html?reset=success");
+	header("Location: forgot-password.php?reset=success");
 
 
 } else {
-	header("Location: forgot-password.html?reset=fail");
+	header("Location: forgot-password.php?reset=fail");
 }

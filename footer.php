@@ -62,7 +62,7 @@
                             <a href="register.php" class="text-muted">Register</a>
                         </li>
                         <li class="mb-2">
-                            <a href="contact-us.php" class="text-muted">Contact Us</a>
+                            <a href="contact.php" class="text-muted">Contact Us</a>
                         </li>
                     </ul>
                 </div>

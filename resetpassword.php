@@ -6,12 +6,24 @@ if (isset($_POST["reset-password-submit"])) {
 	$validator = $_POST["validator"];
 	$password = $_POST["pwd"];
 	$passwordRepear = $_POST["pwd-repeat"];
+	$url = $_POST['url'];
+	$url = str_replace("&password=empty", "", $url);
+	$url = str_replace("&password=error", "", $url);
+	$url = str_replace("&password=not-stronged", "", $url);
+
+	$uppercase = preg_match('@[A-Z]@', $password);
+	$lowercase = preg_match('@[a-z]@', $password);
+	$number = preg_match('@[0-9]@', $password);
+	$specialChars = preg_match('@[^\w]@', $password);
 
 	if (empty($password) || empty($passwordRepear)) {
-			header("Location: forgot-password.html?empty");
+			header("Location: ". $url . "&password=empty");
 			exit();
 		} else if($password != $passwordRepear) {
-			header("Location: forgot-password.html?error");
+			header("Location: ". $url. "&password=error");
+			exit();
+		} else if(strlen($password) < 8 || !$uppercase || !$lowercase || !$number || !$specialChars){
+			header('Location: '. $url . '&password=not-stronged');
 			exit();
 		}
 
@@ -23,7 +35,7 @@ if (isset($_POST["reset-password-submit"])) {
 		$stmt = mysqli_stmt_init($link);
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 			//echo "There was an error!";
-			header("Location: forgot-password.html?reset=fail");
+			header("Location: forgot-password.php?reset=fail");
 			exit();
 		} else {
 			mysqli_stmt_bind_param($stmt, "ss", $selector, $currentDate);
@@ -32,7 +44,7 @@ if (isset($_POST["reset-password-submit"])) {
 			$result = mysqli_stmt_get_result($stmt);
 			if (!$row = mysqli_fetch_assoc($result)) {
 				//echo "you need to re-submit your reset request";
-				header("Location: forgot-password.html?reset=fail");
+				header("Location: forgot-password.php?reset=fail");
 				exit();
 			}  else {
 
@@ -41,7 +53,7 @@ if (isset($_POST["reset-password-submit"])) {
 
 				if ($tokenCheck === false) {
 					//echo "you need to re-submit your reset request";
-					header("Location: forgot-password.html?reset=fail");
+					header("Location: forgot-password.php?reset=fail");
 					exit();
 				} elseif ($tokenCheck === true) {
 
@@ -52,7 +64,7 @@ if (isset($_POST["reset-password-submit"])) {
 					$stmt = mysqli_stmt_init($link);
 					if (!mysqli_stmt_prepare($stmt, $sql)) {
 						//echo "There was an error!";
-						header("Location: forgot-password.html?reset=fail");
+						header("Location: forgot-password.php?reset=fail");
 						exit();
 					} else {
 						mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
@@ -60,7 +72,7 @@ if (isset($_POST["reset-password-submit"])) {
 						$result = mysqli_stmt_get_result($stmt);
 						if (!$row = mysqli_fetch_assoc($result)) {
 							//echo "There was an error!";
-							header("Location: forgot-password.html?reset=fail");
+							header("Location: forgot-password.php?reset=fail");
 							exit();
 						}  else {
 
@@ -69,7 +81,7 @@ if (isset($_POST["reset-password-submit"])) {
 							$stmt = mysqli_stmt_init($link);
 							if (!mysqli_stmt_prepare($stmt, $sql)) {
 								//echo "There was an error!";
-								header("Location: forgot-password.html?reset=fail");
+								header("Location: forgot-password.php?reset=fail");
 								exit();
 							} else {
 								$newPwdHash = password_hash($password, PASSWORD_DEFAULT);
@@ -80,7 +92,7 @@ if (isset($_POST["reset-password-submit"])) {
 								$stmt = mysqli_stmt_init($link);
 								if (!mysqli_stmt_prepare($stmt, $sql)) {
 									//echo "There was an error!";
-									header("Location: forgot-password.html?reset=fail");
+									header("Location: forgot-password.php?reset=fail");
 									exit();
 								} else {
 									mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
