@@ -11,7 +11,14 @@ session_start();
             <button type="submit" class="btn btn-search" title="Search"><i class="fa fa-search fa-lg"
                     aria-hidden="true"></i></button>
             <li>
+                <?php
+                    if(isset($_COOKIE['loggedin'])){
+                        ?>
                 <a href="cart-view.php"><img src="images/ecc.png" class="cart" title="Cart" /></a>
+                <?php
+                    }
+                ?>
+
             </li>
             <!-- If a user is logged display a logout button -->
             <li>

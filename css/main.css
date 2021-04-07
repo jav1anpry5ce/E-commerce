@@ -32,7 +32,7 @@ html {
   overflow: hidden;
 }
 .search:focus {
-  outline: none;
+  outline: 0 none;
 }
 .cart {
   overflow: hidden;
@@ -52,9 +52,9 @@ html {
   color: white;
   display: block;
   text-align: center;
-  margin-top: 7%;
+  margin-top: 9%;
   font-size: 14px;
-  margin-right: 15px;
+  margin-right: 25px;
   text-decoration: none;
 }
 .account:hover {
@@ -72,13 +72,12 @@ html {
   font-size: 5px;
 }
 .btn-search {
-  margin-left: -55px;
+  margin-left: -57px;
   margin-top: -2px;
   width: 50px;
   height: 39px;
   background-color: white;
   text-decoration: none;
-  /* border: 2px solid rgb(25, 37, 49); */
   transition-duration: 0.4s;
   border-radius: 5px;
 }
@@ -89,10 +88,10 @@ html {
   text-align: center;
 }
 .card {
-  color: rgba(0, 0, 0, 0.938);
+  color: rgba(0, 0, 0, 0.794);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0);
   transition: 0.4s;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 15rem;
   margin: 0.5rem 0.7rem auto;
   align-items: center;
@@ -100,11 +99,12 @@ html {
 }
 .card-body {
   width: 100%;
-  height: auto;
+  margin-top: 5px;
   text-align: left;
 }
 .image {
-  height: 200px;
+  margin-top: 5px;
+  height: 180px;
   width: 200px;
 }
 .flex {
@@ -128,8 +128,9 @@ html {
 }
 .list-image {
   text-align: center;
-  height: 150px;
-  width: 150px;
+  resize: both;
+  max-width: 160px;
+  height: auto;
 }
 .list-body {
   margin-top: 2%;
@@ -142,7 +143,7 @@ html {
   color: rgba(0, 0, 0, 0.781);
 }
 .list-body a:hover {
-  color: rgb(216, 141, 1);
+  color: rgb(231, 162, 0);
 }
 .list-title {
   font-size: 30px;
@@ -156,13 +157,12 @@ html {
   margin-top: 1%;
 }
 .modal-view-image {
-  height: 35%;
-  width: 35%;
+  height: 25%;
+  max-width: 28%;
 }
 .modal-view-body {
   margin-left: 3%;
   margin-top: 1%;
-  align-items: center;
   text-align: left;
 }
 .modal-view-title {
@@ -217,8 +217,8 @@ html {
 }
 .cartt-image {
   align-items: left;
-  height: 200px;
-  width: 200px;
+  height: auto;
+  max-width: 200px;
 }
 .cartt-body {
   margin-left: 3%;
@@ -233,8 +233,7 @@ html {
   position: absolute;
   z-index: 1;
   top: 10%;
-  bottom: 0;
-  left: 77%;
+  right: 6%;
 }
 footer {
   position: absolute;

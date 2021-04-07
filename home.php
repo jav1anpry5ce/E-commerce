@@ -27,16 +27,10 @@
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="images/e-commerce.png" />
+    <script src="js/main.js"></script>
 </head>
 
 <body>
-    <script type="text/javascript">
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 2000);
-    </script>
     <?php
     require_once 'navbar.php';
     if(isset($_GET['cart'])){
@@ -55,7 +49,7 @@
 
     <div class="container">
         <h1>Top pick of the day</h1>
-        <div class="flex d-flex flex-row justify-content-center">
+        <div class="flex d-flex flex-row flex-wrap justify-content-center">
             <?php
                 include 'conn.php';
                 // Get the first four items in the database.
@@ -71,7 +65,7 @@
                         $description = $row["product_description"];
                         ?>
             <!-- display items in html. -->
-            <div class="card" style="height:360px">
+            <div class="card">
                 <a href="" data-toggle="modal" data-target="#<?php echo $id ?>"><img class="card-img-top image"
                         src=<?php echo $image ?>></a>
                 <div class="card-body">

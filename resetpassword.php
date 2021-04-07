@@ -58,7 +58,6 @@ if (isset($_POST["reset-password-submit"])) {
 				} elseif ($tokenCheck === true) {
 
 					$tokenEmail = $row['pwdResetEmail'];
-					$email = $tokenEmail;
 
 					$sql = "SELECT * FROM users WHERE email=?;";
 					$stmt = mysqli_stmt_init($link);
@@ -74,7 +73,7 @@ if (isset($_POST["reset-password-submit"])) {
 							//echo "There was an error!";
 							header("Location: forgot-password.php?reset=fail");
 							exit();
-						}  else {
+						} else{
 
 							$sql = "UPDATE users SET password=? WHERE email=?";
 
@@ -98,7 +97,6 @@ if (isset($_POST["reset-password-submit"])) {
 									mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
 									mysqli_stmt_execute($stmt);
 									// if password was reset the an email is sent to the user.
-									$to = $email;
 
 									$subject = "Password sucessfully reset for E-Commerce.";
 
@@ -109,7 +107,7 @@ if (isset($_POST["reset-password-submit"])) {
 									$headers = "From: E-Commerce <donotreply@localhost>\r\n";
 									$headers .= "Content-type: text/html\r\n";
 
-									mail($to, $subject, $message, $headers);
+									mail($tokenEmail, $subject, $message, $headers);
 
 									header("Location: login.php");
 								}

@@ -5,6 +5,9 @@
     $url = "http://";
   }
   $url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  if(!$_GET['page']){
+      header('Location: '. $url . '&page=1');   
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,25 +31,19 @@
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/main.js"></script>
     <link rel="icon" type="image/png" href="images/e-commerce.png" />
     <title>Products</title>
 </head>
 
 <body>
-    <script type="text/javascript">
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 2000);
-    </script>
     <?php
     require_once 'navbar.php';
     if(isset($_GET['cart'])){
         if($_GET['cart'] === 'updated'){
             ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-        <strong>Sucess!</strong> Item added to cart.
+        <strong>Success!</strong> Item added to cart.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -127,6 +124,8 @@
                                         <input type="hidden" name="hidden-name" value="<?php echo $product_name?>" />
                                         <input type="hidden" name="hidden-price" value="<?php echo $product_price?>" />
                                         <input type="hidden" name="hidden-image" value="<?php echo $product_image?>" />
+                                        <input type="hidden" name="hidden-description"
+                                            value="<?php echo $product_description?>" />
                                         <input type="hidden" name="url" value="<?php echo $url?>" />
                                         <input type="submit" name="add-to-cart" class="btn btn-outline-secondary btn-sm"
                                             value="Add to Cart" title="Add to Cart">
@@ -152,8 +151,8 @@
                 ?>
             <!-- Create a paginiation to navigate through the pages -->
             <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item">
+                <ul class="pagination justify-content-end">
+                    <li id="previous_page" class="page-item">
                         <a class="page-link" href="product.php?search=<?php
                             if($_GET['page'] > 1){
                             echo str_replace("%", "", $search_value)?>&page=<?php echo $_GET['page'] - 1;
@@ -174,7 +173,7 @@
                     <?php
                         }
                         ?>
-                    <li class="page-item">
+                    <li id="next_page" class="page-item">
                         <a class="page-link" href="product.php?search=<?php
                             if($_GET['page'] != $number_of_pages){
                             echo str_replace("%", "", $search_value)?>&page=<?php echo $_GET['page'] + 1;
@@ -197,6 +196,18 @@
     <?php
         require_once 'footer.php';
     ?>
+    <script>
+    function getParameter(parameterName) {
+        let parameter = new URLSearchParams(window.location.search);
+        return parameter.get(parameterName);
+    }
+    if (getParameter("page") === "1") {
+        document.getElementById("previous_page").classList.add("disabled");
+    }
+    if (getParameter("page") >= "<?php echo $number_of_pages ?>") {
+        document.getElementById("next_page").classList.add("disabled");
+    }
+    </script>
 </body>
 
 </html>

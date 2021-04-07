@@ -145,7 +145,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
 				// Sends email to the new user.
-				$to = $email;
 				$subject = "Welcome to E-Commerce";
 				$message = "<p>Hello ". $firstname . ",</p>";
 				$message .= "<p>We are delighted to have you join E-Commerce. You'll find great deals here.</p>";
@@ -153,7 +152,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				$message .= "<p>E-Commerce</p>";
 				$headers = "From: E-Commerce <donotreply@localhost>\r\n";
 				$headers .= "Content-type: text/html\r\n";
-				mail($to, $subject, $message, $headers);
+				mail($email, $subject, $message, $headers);
                 // Redirect to login page
             	header("location: login.php");
             } else{

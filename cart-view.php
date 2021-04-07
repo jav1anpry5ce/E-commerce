@@ -41,7 +41,8 @@
                 <div class="cartt-body">
                     <h5 class="cartt-title"><?php echo $value['item-name'];?></h5>
                     <p><b>$<?php echo $value['item-price'];?></b></p>
-                    <input id="item-quantity" type="number" class="co" value="<?php echo $value['item-quantity'];?>" />
+                    <input id="item-quantity" type="number" min="1" max="10" class="co"
+                        value="<?php echo $value['item-quantity'];?>" />
                     <a href="cart.php?action=delete&id=<?php echo $value['item-id'];?>">Remove</a>
                 </div>
             </div>

@@ -4,6 +4,11 @@ $target_dir = "images/";
 session_start();
 require_once 'admin-timeout.php';
 if(isset($_SESSION['admin']) && $_SESSION['admin'] === true){
+    // Check if page is being actively being used and update the timeout accordlingly. 
+    $refreshed = (isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0');
+    if($refreshed){
+        $_SESSION['admin-time'] = time();
+    }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $imageFileType = isset($imageFileType) ?  $imageFileType  : '';
